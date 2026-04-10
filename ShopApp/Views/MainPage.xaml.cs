@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
-using ShopApp.Data;
+using ShopApp.DataAcces;
 
 namespace ShopApp.Views;
 
-public partial class SummaryPage : ContentPage
+public partial class MainPage : ContentPage
 {
     private readonly ShopDbContext _dbContext;
 
-    public SummaryPage(ShopDbContext dbContext)
+    public MainPage(ShopDbContext dbContext)
     {
         InitializeComponent();
         _dbContext = dbContext;
@@ -21,23 +21,18 @@ public partial class SummaryPage : ContentPage
 
     private void LoadSummary()
     {
-        LblTotalProducts.Text = _dbContext.Products.Count().ToString();
-        LblTotalClients.Text = _dbContext.Clients.Count().ToString();
+        LblTotalProducts.Text   = _dbContext.Products.Count().ToString();
+        LblTotalClients.Text    = _dbContext.Clients.Count().ToString();
         LblTotalCategories.Text = _dbContext.Categories.Count().ToString();
 
         var avgPrice = _dbContext.Products.Any()
             ? _dbContext.Products.Average(p => p.Precio)
             : 0;
-        LblAvgPrice.Text = $"${avgPrice:N2}";
+        LblAvgPrice.Text = avgPrice.ToString("C");
     }
 
     private async void OnVerProductosClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//products");
-    }
-
-    private async void OnVerClientesClicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//clients");
     }
 }

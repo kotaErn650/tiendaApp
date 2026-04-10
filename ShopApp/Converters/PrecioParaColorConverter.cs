@@ -3,8 +3,8 @@ using System.Globalization;
 namespace ShopApp.Converters;
 
 /// <summary>
-/// Convierte el precio de un producto en un color: rojo para precios altos (>= 500),
-/// naranja para precios medios (>= 100) y verde para precios bajos.
+/// Convierte el precio de un producto en un color:
+/// LimeGreen para precios ≤ 100 y DarkViolet para precios > 100.
 /// </summary>
 public class PrecioParaColorConverter : IValueConverter
 {
@@ -12,11 +12,7 @@ public class PrecioParaColorConverter : IValueConverter
     {
         if (value is decimal precio)
         {
-            if (precio >= 500m)
-                return Colors.Red;
-            if (precio >= 100m)
-                return Colors.Orange;
-            return Colors.Green;
+            return precio <= 100m ? Colors.LimeGreen : Colors.DarkViolet;
         }
 
         return Colors.Black;

@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
-using ShopApp.Data;
+using ShopApp.DataAcces;
 using ShopApp.Models;
 
 namespace ShopApp.Views;
@@ -65,9 +65,8 @@ public partial class ProductsPage : ContentPage
     {
         if (e.CurrentSelection.FirstOrDefault() is Product product)
         {
-            // Deselect the item
             ProductsCollectionView.SelectedItem = null;
-            await Shell.Current.GoToAsync($"productdetail?productId={product.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ProductDetailPage)}?id={product.Id}");
         }
     }
 
@@ -75,7 +74,6 @@ public partial class ProductsPage : ContentPage
     {
         if (sender is Stepper stepper)
         {
-            // Update the quantity label next to the stepper
             var parent = stepper.Parent as Grid;
             if (parent?.Children.OfType<Label>().LastOrDefault() is Label label)
             {
@@ -84,3 +82,4 @@ public partial class ProductsPage : ContentPage
         }
     }
 }
+
