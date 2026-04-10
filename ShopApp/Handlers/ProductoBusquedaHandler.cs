@@ -1,19 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using ShopApp.Data;
+using ShopApp.DataAcces;
 using ShopApp.Models;
+using ShopApp.Views;
 
 namespace ShopApp.Handlers;
 
 /// <summary>
-/// SearchHandler personalizado para filtrar productos por nombre o descripción.
+/// SearchHandler personalizado que filtra productos por nombre y navega al detalle al seleccionar.
 /// </summary>
-public class ProductSearchHandler : SearchHandler
+public class ProductoBusquedaHandler : SearchHandler
 {
     private readonly ShopDbContext _dbContext;
 
-    public ProductSearchHandler()
+    public ProductoBusquedaHandler()
     {
-        // Resolve DbContext from the DI container to honour single-instance semantics
         _dbContext = IPlatformApplication.Current!.Services.GetRequiredService<ShopDbContext>();
         ItemTemplate = (DataTemplate)Application.Current!.Resources["ProductDataTemplate"];
     }
@@ -45,9 +45,7 @@ public class ProductSearchHandler : SearchHandler
 
         if (item is Product product)
         {
-            // Close the search results
-            var searchPage = Shell.Current.CurrentPage;
-            await Shell.Current.GoToAsync($"productdetail?productId={product.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ProductDetailPage)}?id={product.Id}");
         }
     }
 }

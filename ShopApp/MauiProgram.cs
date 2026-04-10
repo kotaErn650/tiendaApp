@@ -1,5 +1,5 @@
 using Microsoft.Extensions.Logging;
-using ShopApp.Data;
+using ShopApp.DataAcces;
 using ShopApp.Views;
 
 namespace ShopApp;
@@ -22,10 +22,13 @@ public static class MauiProgram
         builder.Services.AddDbContext<ShopDbContext>();
 
         // Register pages for DI / navigation
-        builder.Services.AddTransient<SummaryPage>();
+        builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<ProductsPage>();
         builder.Services.AddTransient<ProductDetailPage>();
         builder.Services.AddTransient<ClientsPage>();
+
+        // Register named route for the detail page
+        Routing.RegisterRoute(nameof(ProductDetailPage), typeof(ProductDetailPage));
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -33,7 +36,7 @@ public static class MauiProgram
 
         var app = builder.Build();
 
-        // Ensure the in-memory database is seeded on startup
+        // Ensure the in-memory database is seeded before returning
         using (var scope = app.Services.CreateScope())
         {
             var db = scope.ServiceProvider.GetRequiredService<ShopDbContext>();

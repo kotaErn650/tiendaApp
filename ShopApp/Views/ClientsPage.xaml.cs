@@ -1,13 +1,26 @@
-using System.Collections.ObjectModel;
-using ShopApp.Data;
+using Microsoft.EntityFrameworkCore;
+using ShopApp.DataAcces;
 using ShopApp.Models;
 
 namespace ShopApp.Views;
 
+/// <summary>
+/// Lightweight display wrapper used to expose a computed initial for the avatar.
+/// </summary>
+internal sealed class ClientDisplayItem
+{
+    public int Id { get; init; }
+    public string Nombre { get; init; } = string.Empty;
+    public string Direccion { get; init; } = string.Empty;
+    public string Inicial => Nombre.Length > 0 ? Nombre[0].ToString().ToUpper() : "?";
+
+    public static ClientDisplayItem FromClient(Client c) =>
+        new() { Id = c.Id, Nombre = c.Nombre, Direccion = c.Direccion };
+}
+
 public partial class ClientsPage : ContentPage
 {
     private readonly ShopDbContext _dbContext;
-    private ObservableCollection<Client> _clients = new();
 
     public ClientsPage(ShopDbContext dbContext)
     {
@@ -21,43 +34,15 @@ public partial class ClientsPage : ContentPage
         LoadClients();
     }
 
-    private void LoadClients(string? filter = null)
+    private void LoadClients()
     {
-        IQueryable<Client> query = _dbContext.Clients.AsNoTracking();
+        var clients = _dbContext.Clients
+            .AsNoTracking()
+            .OrderBy(c => c.Nombre)
+            .Select(c => ClientDisplayItem.FromClient(c))
+            .ToList();
 
-        if (!string.IsNullOrWhiteSpace(filter))
-        {
-            var lower = filter.ToLower();
-            query = query.Where(c =>
-                c.Nombre.ToLower().Contains(lower) ||
-                c.Direccion.ToLower().Contains(lower));
-        }
-
-        _clients = new ObservableCollection<Client>(query.ToList());
-        ClientsCollectionView.ItemsSource = _clients;
-        LblClientCount.Text = $"Total: {_clients.Count} clientes";
-    }
-
-    private void OnClientSearchChanged(object sender, TextChangedEventArgs e)
-    {
-        LoadClients(e.NewTextValue);
-    }
-
-    private async void OnNewClientClicked(object sender, EventArgs e)
-    {
-        string? nombre = await DisplayPromptAsync("Nuevo Cliente", "Nombre del cliente:");
-        if (string.IsNullOrWhiteSpace(nombre)) return;
-
-        string? direccion = await DisplayPromptAsync("Nuevo Cliente", "Dirección:");
-
-        var newClient = new Client
-        {
-            Nombre = nombre.Trim(),
-            Direccion = direccion?.Trim() ?? string.Empty
-        };
-
-        _dbContext.Clients.Add(newClient);
-        await _dbContext.SaveChangesAsync();
-        LoadClients();
+        ClientsCollectionView.ItemsSource = clients;
+        LblCount.Text = $"{clients.Count} cliente{(clients.Count != 1 ? "s" : "")}";
     }
 }

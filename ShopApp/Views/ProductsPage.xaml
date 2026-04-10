@@ -9,7 +9,7 @@
 
     <!-- Search handler attached to Shell -->
     <Shell.SearchHandler>
-        <handlers:ProductSearchHandler
+        <handlers:ProductoBusquedaHandler
             Placeholder="Buscar producto..."
             ShowsResults="True" />
     </Shell.SearchHandler>
@@ -60,7 +60,7 @@
                             FontAttributes="Bold"
                             FontSize="16"
                             HorizontalTextAlignment="End"
-                            Text="{Binding Precio, StringFormat='${0:N2}'}"
+                            Text="{Binding Precio, StringFormat='{0:C}'}"
                             TextColor="{Binding Precio, Converter={StaticResource PrecioParaColorConverter}}" />
 
                         <!-- Descripción -->

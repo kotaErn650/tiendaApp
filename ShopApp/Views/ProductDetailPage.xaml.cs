@@ -1,19 +1,19 @@
+using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
-using ShopApp.Data;
+using ShopApp.DataAcces;
 using ShopApp.Models;
 
 namespace ShopApp.Views;
 
 /// <summary>
-/// Página de detalle de producto. Recibe el ID via IQueryAttributable.
+/// Página de detalle de producto. Recibe el ID via IQueryAttributable con parámetro "id".
 /// </summary>
-[QueryProperty(nameof(ProductId), "productId")]
 public partial class ProductDetailPage : ContentPage, IQueryAttributable
 {
     private readonly ShopDbContext _dbContext;
+    private List<Product> _allProducts = new();
     private Product? _product;
-
-    public int ProductId { get; set; }
+    private int _quantity = 1;
 
     public ProductDetailPage(ShopDbContext dbContext)
     {
@@ -21,54 +21,60 @@ public partial class ProductDetailPage : ContentPage, IQueryAttributable
         _dbContext = dbContext;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        EnsureProductsLoaded();
+    }
+
+    private void EnsureProductsLoaded()
+    {
+        if (_allProducts.Count != 0) return;
+
+        _allProducts = _dbContext.Products.AsNoTracking().Include(p => p.Category).ToList();
+        ProductPicker.ItemsSource = _allProducts.Select(p => p.Nombre).ToList();
+    }
+
     /// <summary>
-    /// Captura los parámetros de navegación y carga el producto correspondiente.
+    /// Captura el parámetro "id" de la navegación y carga el producto.
     /// </summary>
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue("productId", out var idObj) &&
+        if (query.TryGetValue("id", out var idObj) &&
             int.TryParse(idObj?.ToString(), out int id))
         {
-            ProductId = id;
-            LoadProduct(id);
+            EnsureProductsLoaded();
+
+            var index = _allProducts.FindIndex(p => p.Id == id);
+            if (index >= 0)
+            {
+                ProductPicker.SelectedIndex = index;
+            }
         }
     }
 
-    private void LoadProduct(int id)
+    private void OnProductPickerChanged(object sender, EventArgs e)
     {
-        _product = _dbContext.Products
-            .Include(p => p.Category)
-            .FirstOrDefault(p => p.Id == id);
+        var index = ProductPicker.SelectedIndex;
+        if (index < 0 || index >= _allProducts.Count) return;
 
-        if (_product is not null)
-        {
-            BindingContext = _product;
-        }
-        else
-        {
-            DisplayAlert("Error", "Producto no encontrado.", "OK");
-        }
+        _product = _allProducts[index];
+        BindingContext = _product;
+        UpdateTotal();
     }
 
     private void OnQuantityStepperChanged(object sender, ValueChangedEventArgs e)
     {
-        LblQuantity.Text = ((int)e.NewValue).ToString();
+        _quantity = (int)e.NewValue;
+        LblQuantity.Text = _quantity.ToString();
+        UpdateTotal();
     }
 
-    private async void OnSaveClicked(object sender, EventArgs e)
+    private void UpdateTotal()
     {
         if (_product is null) return;
-
-        try
-        {
-            _dbContext.Products.Update(_product);
-            await _dbContext.SaveChangesAsync();
-            await DisplayAlert("Éxito", "Producto actualizado correctamente.", "OK");
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", $"No se pudo guardar: {ex.Message}", "OK");
-        }
+        var total = _product.Precio * _quantity;
+        LblTotal.Text = $"Total: {total:C}";
     }
 
     private async void OnBackClicked(object sender, EventArgs e)
@@ -76,3 +82,4 @@ public partial class ProductDetailPage : ContentPage, IQueryAttributable
         await Shell.Current.GoToAsync("..");
     }
 }
+

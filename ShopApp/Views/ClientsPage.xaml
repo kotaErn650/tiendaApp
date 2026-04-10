@@ -3,18 +3,30 @@
     x:Class="ShopApp.Views.ClientsPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:models="clr-namespace:ShopApp.Models"
     Title="Clientes">
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*">
 
-        <!-- Search bar -->
-        <SearchBar
-            x:Name="ClientSearchBar"
+        <!-- Header bar -->
+        <Grid
             Grid.Row="0"
-            Placeholder="Buscar cliente..."
-            TextChanged="OnClientSearchChanged"
-            Margin="8" />
+            Padding="16,12"
+            BackgroundColor="#F5F5F5"
+            ColumnDefinitions="*,Auto">
+            <Label
+                Grid.Column="0"
+                FontAttributes="Bold"
+                FontSize="16"
+                Text="Lista de Clientes"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="LblCount"
+                Grid.Column="1"
+                FontSize="13"
+                Text="0 clientes"
+                TextColor="Gray"
+                VerticalOptions="Center" />
+        </Grid>
 
         <!-- Clients list -->
         <CollectionView
@@ -22,72 +34,74 @@
             Grid.Row="1">
 
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Client">
-                    <Grid Padding="14,10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto" ColumnSpacing="12">
+                <DataTemplate>
+                    <Grid
+                        Padding="16,12"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="12"
+                        RowDefinitions="Auto,Auto">
 
                         <!-- Avatar circle -->
                         <Border
                             Grid.Row="0"
                             Grid.Column="0"
                             Grid.RowSpan="2"
-                            WidthRequest="48"
-                            HeightRequest="48"
                             BackgroundColor="#512BD4"
-                            StrokeShape="RoundRectangle 24"
+                            HeightRequest="44"
+                            WidthRequest="44"
+                            StrokeShape="RoundRectangle 22"
                             VerticalOptions="Center">
                             <Label
                                 FontAttributes="Bold"
-                                FontSize="20"
+                                FontSize="18"
                                 HorizontalOptions="Center"
-                                VerticalOptions="Center"
+                                Text="{Binding Inicial}"
                                 TextColor="White"
-                                Text="{Binding Nombre[0]}" />
+                                VerticalOptions="Center" />
                         </Border>
 
+                        <!-- Name -->
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
                             FontAttributes="Bold"
                             FontSize="16"
                             Text="{Binding Nombre}" />
+
+                        <!-- Address -->
                         <Label
                             Grid.Row="1"
                             Grid.Column="1"
                             FontSize="13"
                             Text="{Binding Direccion}"
                             TextColor="Gray" />
+
+                        <!-- Separator -->
+                        <BoxView
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="1"
+                            Color="#EEEEEE"
+                            Margin="0,8,0,0"
+                            VerticalOptions="End" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
             <CollectionView.EmptyView>
-                <VerticalStackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
-                    <Label Text="No se encontraron clientes." HorizontalTextAlignment="Center" TextColor="Gray" />
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Padding="20"
+                    VerticalOptions="Center">
+                    <Label
+                        HorizontalTextAlignment="Center"
+                        Text="No hay clientes registrados."
+                        TextColor="Gray" />
                 </VerticalStackLayout>
             </CollectionView.EmptyView>
 
         </CollectionView>
-
-        <!-- FlexLayout footer bar -->
-        <FlexLayout
-            Grid.Row="2"
-            Padding="12"
-            BackgroundColor="#F5F5F5"
-            JustifyContent="SpaceBetween"
-            AlignItems="Center">
-            <Label
-                x:Name="LblClientCount"
-                FontSize="13"
-                TextColor="Gray"
-                Text="Total: 0 clientes" />
-            <Button
-                Text="+ Nuevo Cliente"
-                BackgroundColor="#512BD4"
-                TextColor="White"
-                CornerRadius="6"
-                FontSize="13"
-                Clicked="OnNewClientClicked" />
-        </FlexLayout>
 
     </Grid>
 

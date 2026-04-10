@@ -10,25 +10,44 @@
 
     <!-- Flyout header -->
     <Shell.FlyoutHeader>
-        <VerticalStackLayout BackgroundColor="#512BD4" Padding="20">
+        <VerticalStackLayout BackgroundColor="#512BD4" Padding="20" Spacing="8">
+            <Image
+                Source="shop_header.png"
+                HeightRequest="64"
+                WidthRequest="64"
+                HorizontalOptions="Center"
+                Aspect="AspectFit" />
             <Label
                 FontAttributes="Bold"
                 FontSize="22"
+                HorizontalTextAlignment="Center"
                 Text="ShopApp"
                 TextColor="White" />
             <Label
                 FontSize="13"
+                HorizontalTextAlignment="Center"
                 Text="Gestión de tienda"
                 TextColor="#DDDDDD" />
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
+
+    <!-- Flyout footer -->
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout BackgroundColor="#F5F5F5" Padding="16,12">
+            <Label
+                FontSize="11"
+                HorizontalTextAlignment="Center"
+                Text="ShopApp v1.0 · .NET 10 MAUI"
+                TextColor="Gray" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
 
     <!-- Tab bar with main sections -->
     <TabBar>
         <Tab Title="Resumen" Icon="tab_about.png">
             <ShellContent
                 Title="Resumen"
-                ContentTemplate="{DataTemplate views:SummaryPage}"
+                ContentTemplate="{DataTemplate views:MainPage}"
                 Icon="tab_about.png"
                 Route="summary" />
         </Tab>
@@ -41,11 +60,11 @@
                 Route="products" />
         </Tab>
 
-        <Tab Title="Clientes" Icon="tab_about.png">
+        <Tab Title="Clientes" Icon="tab_clients.png">
             <ShellContent
                 Title="Clientes"
                 ContentTemplate="{DataTemplate views:ClientsPage}"
-                Icon="tab_about.png"
+                Icon="tab_clients.png"
                 Route="clients" />
         </Tab>
     </TabBar>
