@@ -22,7 +22,11 @@ public class ShopDbContext : DbContext
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Nombre = "Laptops" },
             new Category { Id = 2, Nombre = "Smartphones" },
-            new Category { Id = 3, Nombre = "Accesorios" }
+            new Category { Id = 3, Nombre = "Accesorios" },
+            new Category { Id = 4, Nombre = "Monitores" },
+            new Category { Id = 5, Nombre = "Almacenamiento" },
+            new Category { Id = 6, Nombre = "Redes" },
+            new Category { Id = 7, Nombre = "Impresoras" }
         );
 
         // Seed Products (precios entre 50 y 1800)
