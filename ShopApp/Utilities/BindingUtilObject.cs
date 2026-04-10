@@ -13,7 +13,7 @@ public class BindingUtilObject : INotifyPropertyChanged
     /// <summary>
     /// Notifica a la UI que una propiedad ha cambiado.
     /// </summary>
-    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -27,7 +27,7 @@ public class BindingUtilObject : INotifyPropertyChanged
             return false;
 
         storage = value;
-        OnPropertyChanged(propertyName);
+        RaisePropertyChanged(propertyName);
         return true;
     }
 }

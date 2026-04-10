@@ -25,6 +25,7 @@ public static class MauiProgram
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<ProductsPage>();
         builder.Services.AddTransient<ProductDetailPage>();
+        builder.Services.AddTransient<ClientsPage>();
 
         // Register named route for the detail page
         Routing.RegisterRoute(nameof(ProductDetailPage), typeof(ProductDetailPage));
