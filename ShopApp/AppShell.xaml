@@ -23,12 +23,23 @@
         </VerticalStackLayout>
     </Shell.FlyoutHeader>
 
+    <!-- Flyout footer -->
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout BackgroundColor="#F5F5F5" Padding="16,12">
+            <Label
+                FontSize="11"
+                HorizontalTextAlignment="Center"
+                Text="ShopApp v1.0 · .NET 10 MAUI"
+                TextColor="Gray" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+
     <!-- Tab bar with main sections -->
     <TabBar>
         <Tab Title="Resumen" Icon="tab_about.png">
             <ShellContent
                 Title="Resumen"
-                ContentTemplate="{DataTemplate views:SummaryPage}"
+                ContentTemplate="{DataTemplate views:MainPage}"
                 Icon="tab_about.png"
                 Route="summary" />
         </Tab>
@@ -39,14 +50,6 @@
                 ContentTemplate="{DataTemplate views:ProductsPage}"
                 Icon="tab_feeds.png"
                 Route="products" />
-        </Tab>
-
-        <Tab Title="Clientes" Icon="tab_about.png">
-            <ShellContent
-                Title="Clientes"
-                ContentTemplate="{DataTemplate views:ClientsPage}"
-                Icon="tab_about.png"
-                Route="clients" />
         </Tab>
     </TabBar>
 

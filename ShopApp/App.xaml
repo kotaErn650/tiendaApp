@@ -32,7 +32,7 @@
                         FontAttributes="Bold"
                         FontSize="16"
                         HorizontalTextAlignment="End"
-                        Text="{Binding Precio, StringFormat='${0:N2}'}"
+                        Text="{Binding Precio, StringFormat='{0:C}'}"
                         TextColor="{Binding Precio, Converter={StaticResource PrecioParaColorConverter}}" />
                     <Label
                         Grid.Row="1"

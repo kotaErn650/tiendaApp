@@ -8,7 +8,7 @@ public partial class AppShell : Shell
     {
         InitializeComponent();
 
-        // Register named routes for detail pages (not in tab bar)
-        Routing.RegisterRoute("productdetail", typeof(ProductDetailPage));
+        // Register named route for the product detail page
+        Routing.RegisterRoute(nameof(ProductDetailPage), typeof(ProductDetailPage));
     }
 }
