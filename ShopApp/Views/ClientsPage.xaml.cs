@@ -23,7 +23,7 @@ public partial class ClientsPage : ContentPage
 
     private void LoadClients(string? filter = null)
     {
-        IEnumerable<Client> query = _dbContext.Clients.AsEnumerable();
+        IQueryable<Client> query = _dbContext.Clients.AsNoTracking();
 
         if (!string.IsNullOrWhiteSpace(filter))
         {

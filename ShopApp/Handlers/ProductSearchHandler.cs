@@ -13,9 +13,8 @@ public class ProductSearchHandler : SearchHandler
 
     public ProductSearchHandler()
     {
-        _dbContext = new ShopDbContext();
-        // Ensure seed data is loaded
-        _dbContext.Database.EnsureCreated();
+        // Resolve DbContext from the DI container to honour single-instance semantics
+        _dbContext = IPlatformApplication.Current!.Services.GetRequiredService<ShopDbContext>();
         ItemTemplate = (DataTemplate)Application.Current!.Resources["ProductDataTemplate"];
     }
 
