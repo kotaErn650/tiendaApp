@@ -1,0 +1,12 @@
+bin/
+obj/
+*.user
+.vs/
+*.suo
+*.userprefs
+.DS_Store
+
+# Node / Vite
+node_modules/
+dist/
+

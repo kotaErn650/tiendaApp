@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ShopApp.DataAccess;
 using ShopApp.Pages;
 
@@ -17,6 +18,10 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+
+#if DEBUG
+        builder.Logging.AddDebug();
+#endif
 
         // Registrar DbContext con InMemory
         builder.Services.AddDbContext<ShopDbContext>(options =>
