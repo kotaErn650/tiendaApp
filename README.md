@@ -1,11 +1,56 @@
 # ShopApp
 
-Aplicación de tienda de tecnología disponible en **dos versiones**:
+Aplicación de tienda de tecnología disponible en **tres versiones**:
 
 | Versión | Tecnología | Descripción |
 |---------|-----------|-------------|
+| 💻 **Consola (.NET)** | .NET 9 Console App | Ejecutable directamente con `dotnet run` en cualquier OS |
 | 🌐 **Web (PWA)** | Vite + Vanilla JS | Funciona en cualquier navegador y se puede instalar en Android |
 | 📱 **Android nativo** | .NET MAUI 10 | APK nativa para Android vía Visual Studio |
+
+---
+
+## 💻 Versión Consola — Ejecutar con `dotnet run`
+
+La forma más rápida de probar la lógica de negocio sin necesitar Visual Studio ni un dispositivo Android.
+
+### Requisitos
+- [.NET 9 SDK](https://dotnet.microsoft.com/download) (o superior)
+
+### Ejecución
+
+```bash
+cd ShopApp.Console
+dotnet run
+```
+
+La aplicación muestra en consola:
+- **Resumen**: conteo de categorías, productos y clientes
+- **Categorías**: lista completa (7 categorías)
+- **Productos**: tabla con nombre, precio y color indicador (✅ ≤ $100 · 🟣 > $100)
+- **Clientes**: listado con nombre y dirección
+- **Detalle de producto**: información completa con simulación de pedido (cantidad × precio)
+- **Búsqueda filtrada**: productos con precio > $100
+
+### Arquitectura de la solución .NET
+
+```
+ShopApp.sln
+├── ShopApp.Core/          # Biblioteca de clases (net9.0) — lógica reutilizable
+│   └── DataAccess/
+│       ├── Entities.cs    # Records: Product, Client, Category
+│       └── ShopDbContext.cs  # EF Core InMemory + Seed data
+│
+├── ShopApp.Console/       # Proyecto ejecutable (net9.0) — punto de entrada
+│   └── Program.cs         # Main: instancia ShopDbContext y muestra datos
+│
+└── ShopApp/               # Proyecto MAUI (net10.0-android) — app Android
+    └── ...
+```
+
+`ShopApp.Console` referencia `ShopApp.Core`, que contiene toda la lógica de datos.
+El proyecto MAUI comparte la misma lógica conceptual y puede ser refactorizado para usar
+`ShopApp.Core` en el futuro.
 
 ---
 
