@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.Pages.ClientsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Clientes">
+
+    <CollectionView x:Name="ClientsCollection" SelectionMode="None">
+
+        <CollectionView.EmptyView>
+            <Label
+                Text="No hay clientes registrados."
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Margin="20"
+                TextColor="{StaticResource Gray400}" />
+        </CollectionView.EmptyView>
+
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Grid
+                    Padding="16,12"
+                    ColumnDefinitions="Auto,*"
+                    ColumnSpacing="16">
+
+                    <!-- Avatar -->
+                    <Frame
+                        Grid.Column="0"
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        CornerRadius="24"
+                        BackgroundColor="{StaticResource Primary}"
+                        Padding="0"
+                        IsClippedToBounds="True">
+                        <Label
+                            Text="👤"
+                            FontSize="22"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Datos -->
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label
+                            Text="{Binding Nombre}"
+                            FontAttributes="Bold"
+                            FontSize="16"
+                            TextColor="{StaticResource Primary}" />
+                        <Label
+                            Text="{Binding Direccion}"
+                            FontSize="13"
+                            TextColor="{StaticResource Gray600}" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+    </CollectionView>
+
+</ContentPage>
