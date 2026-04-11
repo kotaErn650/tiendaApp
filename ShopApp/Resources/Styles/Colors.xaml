@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!-- Colores de marca de la tienda -->
+    <Color x:Key="Primary">#2E7D97</Color>
+    <Color x:Key="PrimaryDark">#1A5C72</Color>
+    <Color x:Key="PrimaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Secondary">#E67E22</Color>
+    <Color x:Key="SecondaryDarkText">#FFFFFF</Color>
+    <Color x:Key="Tertiary">#27AE60</Color>
+
+    <Color x:Key="White">#FFFFFF</Color>
+    <Color x:Key="Black">#000000</Color>
+
+    <Color x:Key="Gray100">#F5F5F5</Color>
+    <Color x:Key="Gray200">#E0E0E0</Color>
+    <Color x:Key="Gray300">#BDBDBD</Color>
+    <Color x:Key="Gray400">#9E9E9E</Color>
+    <Color x:Key="Gray500">#757575</Color>
+    <Color x:Key="Gray600">#616161</Color>
+    <Color x:Key="Gray900">#212121</Color>
+    <Color x:Key="Gray950">#111111</Color>
+
+    <Color x:Key="PageBackgroundColor">#FAFAFA</Color>
+    <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
+
+</ResourceDictionary>

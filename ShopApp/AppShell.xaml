@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ShopApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:ShopApp"
+    xmlns:pages="clr-namespace:ShopApp.Pages"
+    FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="True">
+
+    <!-- Flyout Header con imagen -->
+    <Shell.FlyoutHeader>
+        <Grid
+            HeightRequest="180"
+            BackgroundColor="{StaticResource Primary}">
+            <Image
+                Source="shop_header.png"
+                Aspect="AspectFill"
+                Opacity="0.6" />
+            <Label
+                Text="ShopApp"
+                FontSize="28"
+                FontAttributes="Bold"
+                TextColor="White"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Pestañas de navegación inferior -->
+    <TabBar>
+        <Tab Title="Resumen" Icon="tab_home.png">
+            <ShellContent
+                Title="Resumen"
+                ContentTemplate="{DataTemplate local:MainPage}" />
+        </Tab>
+
+        <Tab Title="Productos" Icon="tab_products.png">
+            <ShellContent
+                Title="Productos"
+                ContentTemplate="{DataTemplate pages:ProductsPage}" />
+        </Tab>
+
+        <Tab Title="Clientes" Icon="tab_clients.png">
+            <ShellContent
+                Title="Clientes"
+                ContentTemplate="{DataTemplate pages:ClientsPage}" />
+        </Tab>
+    </TabBar>
+
+    <!-- Flyout Footer con nombre y versión de la app -->
+    <Shell.FlyoutFooter>
+        <VerticalStackLayout
+            Padding="16,8"
+            BackgroundColor="{StaticResource Gray100}">
+            <Label
+                Text="ShopApp"
+                FontAttributes="Bold"
+                FontSize="14"
+                TextColor="{StaticResource Gray600}" />
+            <Label
+                x:Name="LabelVersion"
+                FontSize="12"
+                TextColor="{StaticResource Gray400}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutFooter>
+
+</Shell>

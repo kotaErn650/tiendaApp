@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+    x:Class="ShopApp.App"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:ShopApp.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Convertidor de precio a color -->
+            <converters:PrecioParaColorConverter x:Key="PrecioColor" />
+
+            <!-- DataTemplate global de Producto -->
+            <DataTemplate x:Key="ProductDataTemplate">
+                <Grid
+                    Padding="12,8"
+                    ColumnDefinitions="*,Auto"
+                    RowDefinitions="Auto,Auto">
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Text="{Binding Nombre}"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        TextColor="{StaticResource Primary}" />
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Text="{Binding Precio, StringFormat='{0:C}'}"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        TextColor="{Binding Precio, Converter={StaticResource PrecioColor}}"
+                        HorizontalOptions="End" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Text="{Binding Descripcion}"
+                        FontSize="13"
+                        TextColor="{StaticResource Gray600}"
+                        LineBreakMode="TailTruncation" />
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>

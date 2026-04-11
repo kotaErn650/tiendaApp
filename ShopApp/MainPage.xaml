@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Resumen">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24,16"
+            Spacing="20">
+
+            <Label
+                Text="Resumen de la Tienda"
+                FontSize="24"
+                FontAttributes="Bold"
+                TextColor="{StaticResource Primary}"
+                HorizontalOptions="Center" />
+
+            <!-- Tarjeta Categorías -->
+            <Frame
+                CornerRadius="12"
+                Padding="20"
+                BackgroundColor="{StaticResource Gray100}"
+                BorderColor="{StaticResource Primary}">
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        Text="📂 Categorías"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Gray600}" />
+                    <Label
+                        x:Name="LabelCategorias"
+                        Text="0"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Primary}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Tarjeta Productos -->
+            <Frame
+                CornerRadius="12"
+                Padding="20"
+                BackgroundColor="{StaticResource Gray100}"
+                BorderColor="{StaticResource Secondary}">
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        Text="🛒 Productos"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Gray600}" />
+                    <Label
+                        x:Name="LabelProductos"
+                        Text="0"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Secondary}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Tarjeta Clientes -->
+            <Frame
+                CornerRadius="12"
+                Padding="20"
+                BackgroundColor="{StaticResource Gray100}"
+                BorderColor="{StaticResource Tertiary}">
+                <VerticalStackLayout Spacing="6">
+                    <Label
+                        Text="👥 Clientes"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Gray600}" />
+                    <Label
+                        x:Name="LabelClientes"
+                        Text="0"
+                        FontSize="40"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Tertiary}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.Pages.ProductDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detalle del Producto">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <!-- Nombre del producto -->
+            <Label
+                x:Name="LabelNombre"
+                FontSize="22"
+                FontAttributes="Bold"
+                TextColor="{StaticResource Primary}"
+                HorizontalOptions="Center" />
+
+            <!-- Precio con color condicional -->
+            <Label
+                x:Name="LabelPrecio"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <!-- Descripción -->
+            <Label
+                x:Name="LabelDescripcion"
+                FontSize="15"
+                TextColor="{StaticResource Gray600}"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center" />
+
+            <BoxView HeightRequest="1" Color="{StaticResource Gray200}" Margin="0,8" />
+
+            <!-- Grid: Selector de producto y categoría -->
+            <Grid
+                ColumnDefinitions="Auto,*"
+                RowDefinitions="Auto,Auto"
+                ColumnSpacing="12"
+                RowSpacing="12">
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="Producto:"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" />
+
+                <Picker
+                    x:Name="PickerProductos"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    ItemDisplayBinding="{Binding Nombre}"
+                    SelectedIndexChanged="OnPickerProductoChanged"
+                    Title="Seleccionar producto" />
+
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Categoría ID:"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" />
+
+                <Label
+                    x:Name="LabelCategoria"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    VerticalOptions="Center"
+                    TextColor="{StaticResource Gray600}" />
+            </Grid>
+
+            <BoxView HeightRequest="1" Color="{StaticResource Gray200}" Margin="0,8" />
+
+            <!-- FlexLayout: Cantidad con Stepper -->
+            <FlexLayout
+                Direction="Row"
+                AlignItems="Center"
+                JustifyContent="SpaceBetween"
+                Wrap="NoWrap">
+
+                <Label
+                    Text="Cantidad:"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    VerticalOptions="Center" />
+
+                <Stepper
+                    x:Name="StepperCantidad"
+                    Minimum="1"
+                    Maximum="100"
+                    Increment="1"
+                    Value="1"
+                    ValueChanged="OnStepperChanged" />
+
+                <Label
+                    x:Name="LabelCantidad"
+                    Text="1"
+                    FontSize="20"
+                    FontAttributes="Bold"
+                    TextColor="{StaticResource Primary}"
+                    VerticalOptions="Center"
+                    MinimumWidthRequest="40"
+                    HorizontalTextAlignment="Center" />
+            </FlexLayout>
+
+            <!-- Total -->
+            <Frame
+                CornerRadius="10"
+                Padding="16"
+                BackgroundColor="{StaticResource Gray100}"
+                Margin="0,8">
+                <VerticalStackLayout Spacing="4">
+                    <Label
+                        Text="Total estimado"
+                        FontSize="14"
+                        TextColor="{StaticResource Gray600}"
+                        HorizontalOptions="Center" />
+                    <Label
+                        x:Name="LabelTotal"
+                        FontSize="26"
+                        FontAttributes="Bold"
+                        TextColor="{StaticResource Primary}"
+                        HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Botón agregar al carrito -->
+            <Button
+                Text="Agregar al carrito"
+                BackgroundColor="{StaticResource Primary}"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="0,14"
+                FontAttributes="Bold"
+                Margin="0,8"
+                Clicked="OnAgregarCarritoClicked" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
