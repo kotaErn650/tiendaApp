@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ShopApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:ShopApp.Views"
+    xmlns:app="clr-namespace:Microsoft.Maui.ApplicationModel;assembly=Microsoft.Maui.Essentials"
+    FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="{StaticResource Primary}"
+    Title="ShopApp">
+
+    <!-- Encabezado del menú lateral -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="{StaticResource Primary}" HeightRequest="180" Padding="20">
+            <Image
+                Source="shop_logo.svg"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                HeightRequest="100"
+                WidthRequest="100" />
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Pie del menú lateral -->
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20,10" BackgroundColor="{StaticResource PrimaryDark}">
+            <Label
+                Text="ShopApp"
+                FontAttributes="Bold"
+                TextColor="White"
+                FontSize="14" />
+            <Label
+                Text="{Binding Source={x:Static app:AppInfo.VersionString}, StringFormat='v{0}'}"
+                TextColor="LightGray"
+                FontSize="12" />
+        </StackLayout>
+    </Shell.FlyoutFooter>
+
+    <!-- Tabs de navegación -->
+    <TabBar>
+        <Tab Title="Resumen" Icon="tab_resumen.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:MainPage}"
+                Route="MainPage" />
+        </Tab>
+
+        <Tab Title="Productos" Icon="tab_products.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ProductsPage}"
+                Route="ProductsPage" />
+        </Tab>
+
+        <Tab Title="Clientes" Icon="tab_clients.svg">
+            <ShellContent
+                ContentTemplate="{DataTemplate views:ClientsPage}"
+                Route="ClientsPage" />
+        </Tab>
+    </TabBar>
+
+</Shell>

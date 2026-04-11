@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Resumen">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="26"
+                HorizontalOptions="Center"
+                Text="Resumen de la Tienda"
+                TextColor="{StaticResource Primary}" />
+
+            <!-- Categorías -->
+            <Frame CornerRadius="12" Padding="16" BackgroundColor="{StaticResource CardBackground}">
+                <VerticalStackLayout Spacing="4">
+                    <Label FontAttributes="Bold" FontSize="14" Text="Categorías" TextColor="Gray" />
+                    <Label
+                        x:Name="LblCategorias"
+                        FontAttributes="Bold"
+                        FontSize="36"
+                        TextColor="{StaticResource Primary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Productos -->
+            <Frame CornerRadius="12" Padding="16" BackgroundColor="{StaticResource CardBackground}">
+                <VerticalStackLayout Spacing="4">
+                    <Label FontAttributes="Bold" FontSize="14" Text="Productos" TextColor="Gray" />
+                    <Label
+                        x:Name="LblProductos"
+                        FontAttributes="Bold"
+                        FontSize="36"
+                        TextColor="{StaticResource Secondary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Clientes -->
+            <Frame CornerRadius="12" Padding="16" BackgroundColor="{StaticResource CardBackground}">
+                <VerticalStackLayout Spacing="4">
+                    <Label FontAttributes="Bold" FontSize="14" Text="Clientes" TextColor="Gray" />
+                    <Label
+                        x:Name="LblClientes"
+                        FontAttributes="Bold"
+                        FontSize="36"
+                        TextColor="{StaticResource Tertiary}" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.Views.ProductsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:handlers="clr-namespace:ShopApp.Handlers"
+    Title="Productos">
+
+    <Shell.SearchHandler>
+        <handlers:ProductoBusquedaHandler
+            x:Name="BusquedaHandler"
+            Placeholder="Buscar producto..."
+            ShowsResults="True">
+            <handlers:ProductoBusquedaHandler.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*,Auto" Padding="8,4">
+                        <Label Grid.Column="0" Text="{Binding Nombre}" FontAttributes="Bold" />
+                        <Label Grid.Column="1" Text="{Binding Precio, StringFormat='{0:C}'}" TextColor="{StaticResource Primary}" />
+                    </Grid>
+                </DataTemplate>
+            </handlers:ProductoBusquedaHandler.ItemTemplate>
+        </handlers:ProductoBusquedaHandler>
+    </Shell.SearchHandler>
+
+    <CollectionView
+        ItemTemplate="{StaticResource ProductDataTemplate}"
+        ItemsSource="{Binding Products}"
+        SelectionMode="Single"
+        SelectionChanged="OnProductSelected">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+        </CollectionView.ItemsLayout>
+    </CollectionView>
+
+</ContentPage>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="ShopApp.Views.ProductDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:ShopApp.Converters"
+    Title="Detalle del Producto">
+
+    <ScrollView>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Padding="20" RowSpacing="12">
+
+            <!-- Nombre -->
+            <Label
+                Grid.Row="0"
+                FontAttributes="Bold"
+                FontSize="22"
+                Text="{Binding SelectedProduct.Nombre}"
+                TextColor="{StaticResource Primary}" />
+
+            <!-- Descripción -->
+            <Label
+                Grid.Row="1"
+                FontSize="15"
+                Text="{Binding SelectedProduct.Descripcion}"
+                TextColor="Gray" />
+
+            <!-- Precio -->
+            <Label
+                Grid.Row="2"
+                FontAttributes="Bold"
+                FontSize="28"
+                Text="{Binding SelectedProduct.Precio, StringFormat='{0:C}'}"
+                TextColor="{Binding SelectedProduct.Precio, Converter={StaticResource PrecioColor}}" />
+
+            <!-- Separador -->
+            <BoxView Grid.Row="3" Color="LightGray" HeightRequest="1" Margin="0,4" />
+
+            <!-- Controles de cantidad -->
+            <FlexLayout
+                Grid.Row="4"
+                AlignItems="Center"
+                JustifyContent="SpaceBetween"
+                Wrap="NoWrap">
+
+                <Label FontAttributes="Bold" FontSize="16" Text="Cantidad:" />
+
+                <Stepper
+                    x:Name="CantidadStepper"
+                    Minimum="1"
+                    Maximum="100"
+                    Increment="1"
+                    Value="{Binding Cantidad, Mode=TwoWay}" />
+
+                <Label
+                    FontSize="18"
+                    Text="{Binding Cantidad}"
+                    WidthRequest="40"
+                    HorizontalTextAlignment="Center" />
+
+            </FlexLayout>
+
+            <!-- Total -->
+            <Frame Grid.Row="5" CornerRadius="10" Padding="14" BackgroundColor="{StaticResource CardBackground}">
+                <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label FontAttributes="Bold" FontSize="18" Text="Total:" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="22"
+                        Text="{Binding Total, StringFormat='{0:C}'}"
+                        TextColor="{StaticResource Primary}" />
+                </FlexLayout>
+            </Frame>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

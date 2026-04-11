@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+    x:Class="ShopApp.App"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:conv="clr-namespace:ShopApp.Converters"
+    xmlns:models="clr-namespace:ShopApp.Models">
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Convertidor de precio a color -->
+            <conv:PrecioParaColorConverter x:Key="PrecioColor" />
+
+            <!-- DataTemplate global de Producto -->
+            <DataTemplate x:Key="ProductDataTemplate">
+                <Grid ColumnDefinitions="*,Auto" Padding="10" RowDefinitions="Auto,Auto">
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Text="{Binding Nombre}" />
+                    <Label
+                        FontSize="13"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        Text="{Binding Descripcion}"
+                        TextColor="Gray" />
+                    <Label
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
+                        HorizontalOptions="End"
+                        Text="{Binding Precio, StringFormat='{0:C}'}"
+                        TextColor="{Binding Precio, Converter={StaticResource PrecioColor}}"
+                        VerticalOptions="Center" />
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>
