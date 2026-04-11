@@ -90,7 +90,7 @@ public partial class ProductDetailPage : ContentPage, IQueryAttributable
     {
         if (_currentProduct is null) return;
         var cantidad = (int)StepperCantidad.Value;
-        await DisplayAlert(
+        await DisplayAlertAsync(
             "Carrito",
             $"Se agregaron {cantidad} unidad(es) de '{_currentProduct.Nombre}' al carrito.\nTotal: {(_currentProduct.Precio * cantidad):C}",
             "OK");
