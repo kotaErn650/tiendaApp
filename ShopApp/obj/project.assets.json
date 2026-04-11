@@ -292,6 +292,27 @@
           "buildTransitive/net8.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
+      "Microsoft.Extensions.Logging.Debug/9.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.0",
+          "Microsoft.Extensions.Logging": "9.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.0"
+        },
+        "compile": {
+          "lib/net9.0/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/Microsoft.Extensions.Logging.Debug.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net8.0/_._": {}
+        }
+      },
       "Microsoft.Extensions.Options/10.0.0": {
         "type": "package",
         "dependencies": {
@@ -3006,6 +3027,34 @@
         "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
         "microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
         "microsoft.extensions.logging.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Debug/9.0.0": {
+      "sha512": "4wGlHsrLhYjLw4sFkfRixu2w4DK7dv60OjbvgbLGhUJk0eUPxYHhnszZ/P18nnAkfrPryvtOJ3ZTVev0kpqM6A==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.debug/9.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "PACKAGE.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net461/Microsoft.Extensions.Logging.Debug.targets",
+        "buildTransitive/net462/_._",
+        "buildTransitive/net8.0/_._",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.Logging.Debug.targets",
+        "lib/net462/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/net462/Microsoft.Extensions.Logging.Debug.xml",
+        "lib/net8.0/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/net8.0/Microsoft.Extensions.Logging.Debug.xml",
+        "lib/net9.0/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/net9.0/Microsoft.Extensions.Logging.Debug.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Debug.xml",
+        "microsoft.extensions.logging.debug.9.0.0.nupkg.sha512",
+        "microsoft.extensions.logging.debug.nuspec",
         "useSharedDesignerContext.txt"
       ]
     },
@@ -6144,6 +6193,7 @@
   "projectFileDependencyGroups": {
     "net10.0-android36.0": [
       "Microsoft.EntityFrameworkCore.InMemory >= 9.0.0",
+      "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 10.0.0"
     ]
   },
@@ -6193,6 +6243,10 @@
         "targetAlias": "net10.0-android",
         "dependencies": {
           "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[9.0.0, )"
+          },
+          "Microsoft.Extensions.Logging.Debug": {
             "target": "Package",
             "version": "[9.0.0, )"
           },

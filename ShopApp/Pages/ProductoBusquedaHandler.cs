@@ -6,11 +6,13 @@ namespace ShopApp.Pages;
 
 public class ProductoBusquedaHandler : SearchHandler
 {
-    private readonly ShopDbContext _db;
+    private ShopDbContext? _db;
 
-    public ProductoBusquedaHandler(ShopDbContext db)
+    private ShopDbContext Db =>
+        _db ??= IPlatformApplication.Current!.Services.GetRequiredService<ShopDbContext>();
+
+    public ProductoBusquedaHandler()
     {
-        _db = db;
         Placeholder = "Buscar producto...";
         ShowsResults = true;
     }
@@ -26,7 +28,7 @@ public class ProductoBusquedaHandler : SearchHandler
         else
         {
             var query = newValue.ToLowerInvariant();
-            ItemsSource = _db.Products
+            ItemsSource = Db.Products
                 .AsNoTracking()
                 .Where(p => p.Nombre.ToLower().Contains(query) ||
                             p.Descripcion.ToLower().Contains(query))
