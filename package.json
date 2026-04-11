@@ -1,0 +1,27 @@
+{
+  "name": "tiendaapp",
+  "version": "1.0.0",
+  "description": "Aplicación de tienda generada con **.NET MAUI 10.0** orientada a Android, siguiendo la arquitectura de las clases 1-9 del curso.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "start": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kotaErn650/tiendaApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/kotaErn650/tiendaApp/issues"
+  },
+  "homepage": "https://github.com/kotaErn650/tiendaApp#readme",
+  "devDependencies": {
+    "vite": "^8.0.8"
+  }
+}

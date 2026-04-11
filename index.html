@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2E7D97" />
+    <meta name="description" content="ShopApp — Tienda de tecnología" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>ShopApp</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <!-- Header -->
+      <header class="app-header">
+        <button id="btn-back" class="btn-back hidden" aria-label="Volver">&#8592;</button>
+        <h1 id="page-title">ShopApp</h1>
+      </header>
+
+      <!-- Tab bar -->
+      <nav class="tab-bar" id="tab-bar">
+        <button class="tab active" data-tab="summary">&#127968; Resumen</button>
+        <button class="tab" data-tab="products">&#128722; Productos</button>
+        <button class="tab" data-tab="clients">&#128100; Clientes</button>
+      </nav>
+
+      <!-- Pages -->
+      <main id="main-content">
+
+        <!-- Summary Page -->
+        <section id="page-summary" class="page active">
+          <div class="summary-grid">
+            <div class="summary-card">
+              <span class="summary-number" id="count-categories">7</span>
+              <span class="summary-label">Categorías</span>
+            </div>
+            <div class="summary-card">
+              <span class="summary-number" id="count-products">7</span>
+              <span class="summary-label">Productos</span>
+            </div>
+            <div class="summary-card">
+              <span class="summary-number" id="count-clients">2</span>
+              <span class="summary-label">Clientes</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Products Page -->
+        <section id="page-products" class="page">
+          <div class="search-bar">
+            <input type="search" id="search-input" placeholder="Buscar producto..." />
+          </div>
+          <ul id="products-list" class="item-list"></ul>
+        </section>
+
+        <!-- Product Detail Page -->
+        <section id="page-product-detail" class="page">
+          <div class="detail-card">
+            <div class="detail-picker">
+              <label for="picker-products">Producto:</label>
+              <select id="picker-products"></select>
+            </div>
+            <h2 id="detail-nombre"></h2>
+            <p id="detail-descripcion" class="detail-desc"></p>
+            <p class="detail-row"><span class="label">Categoría:</span> <span id="detail-categoria"></span></p>
+            <p class="detail-row">
+              <span class="label">Precio:</span>
+              <span id="detail-precio" class="detail-price"></span>
+            </p>
+            <div class="stepper-row">
+              <label>Cantidad:</label>
+              <button id="btn-minus" class="stepper-btn">−</button>
+              <span id="label-cantidad" class="stepper-value">1</span>
+              <button id="btn-plus" class="stepper-btn">+</button>
+            </div>
+            <p class="detail-row total-row">
+              <span class="label">Total:</span>
+              <span id="detail-total" class="detail-total"></span>
+            </p>
+            <button id="btn-add-cart" class="btn-primary">🛒 Agregar al carrito</button>
+          </div>
+        </section>
+
+        <!-- Clients Page -->
+        <section id="page-clients" class="page">
+          <ul id="clients-list" class="item-list"></ul>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
